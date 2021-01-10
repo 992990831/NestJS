@@ -5,6 +5,8 @@ import { HeaderModule } from './header/header.module';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import 'winston-daily-rotate-file';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 @Module({
   imports: [
@@ -24,6 +26,10 @@ import 'winston-daily-rotate-file';
           ),
         }),
       ],
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
     }),
   ],
   controllers: [AppController],
